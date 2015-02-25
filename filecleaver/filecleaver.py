@@ -89,8 +89,6 @@ def cleavebytes(filename, chunksize, fp=None):
         raise ValueError(
             'cannot cleave file into chunks smaller than 1 byte')
 
-    readers = []
-
     # if a filepointer was provided, use that rather than using 'open'.
     # this gives us the ability to read a stream, zipfile, file from a
     # zipfile, etc, and give back a chunking configuration for that.
@@ -115,12 +113,10 @@ def cleavebytes(filename, chunksize, fp=None):
             eof = True
 
         pos = fp.tell()
-        readers.append(FileChunk(filename, prev_pos, pos))
+        yield FileChunk(filename, prev_pos, pos)
 
     if close_fp:
         fp.close()
-
-    return readers
 
 
 def cleave(filename, chunks):
