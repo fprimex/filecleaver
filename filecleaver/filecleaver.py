@@ -1,9 +1,3 @@
-from __future__ import print_function
-
-
-import os
-
-
 class FileChunkReadError(Exception):
     def __init__(self, filename, error):
         self.filename = filename
@@ -123,6 +117,7 @@ def cleave(filename, chunks):
     if chunks < 1:
         raise ValueError('cannot cleave file into less than 1 chunk')
 
+    import os
     size = os.path.getsize(filename)
     chunksize = size // chunks
 
