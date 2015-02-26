@@ -1,15 +1,20 @@
-import os.path
+import os
 
 from filecleaver import cleave, cleavebytes
 
 from cleave_common import compare, remove
 
-class TestCleave(object):
+class TestCleaveBytes(object):
     def setup(self):
         self.src_filename = os.path.join('tests', 'words')
         self.dst_basenames = []
-        self.n = 10
-        self.readers = cleave(self.src_filename, self.n)
+
+        size = os.path.getsize(self.src_filename)
+        chunks = 8
+        self.b = size // chunks
+
+        self.readers = list(cleavebytes(self.src_filename, self.b))
+        self.n = len(self.readers)
 
     def teardown(self):
         try:
@@ -18,8 +23,8 @@ class TestCleave(object):
             raise e
             #pass
 
-    def test_cleave_iter(self):
-        basename = 'cleave_iter'
+    def test_cleavebytes_iter(self):
+        basename = 'cleavebytes_iter'
         self.dst_basenames.append(basename)
 
         for i, reader in enumerate(self.readers):
@@ -29,8 +34,8 @@ class TestCleave(object):
 
         assert compare(self.src_filename, basename, self.n)
 
-    def test_cleave_readlines(self):
-        basename = 'cleave_readlines'
+    def test_cleavebytes_readlines(self):
+        basename = 'cleavebytes_readlines'
         self.dst_basenames.append(basename)
 
         for i, reader in enumerate(self.readers):
@@ -39,8 +44,8 @@ class TestCleave(object):
 
         assert compare(self.src_filename, basename, self.n)
 
-    def test_cleave_read(self):
-        basename = 'cleave_read'
+    def test_cleavebytes_read(self):
+        basename = 'cleavebytes_read'
         self.dst_basenames.append(basename)
 
         for i, reader in enumerate(self.readers):
