@@ -37,7 +37,7 @@ You’d be better off doing your processing while that line-by-line read was
 happening.
 
 So, what we need is a fast way to take a file off disk, chunk it up, and send
-the bits to different processes. The spit doesn’t need to be exact, just close
+the bits to different processes. The split doesn’t need to be exact, just close
 enough that all processes are doing similar amounts of meaningful work.
 
 ### Seeking and finding
