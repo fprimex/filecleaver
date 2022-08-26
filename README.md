@@ -54,7 +54,7 @@ implementation in Python to finish answering the interview question thoroughly
 (even though I got the job already).
 
 This is what filecleaver does. You can decide you want N chunks, or you can ask
-for chunks of M bytes. Fileclever then seeks in your file (or stream or
+for chunks of M bytes. Filecleaver then seeks in your file (or stream or
 whatever) and hands you back a list of easy to use file-like objects called
 FileChunks. There are many utilities that do this kind of work, including
 `split(1)`, however the special thing about filecleaver is that you get chunks
